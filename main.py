@@ -1,9 +1,9 @@
-from declaration_builder import DeclarationBuilder
-from pdf_readers.pdf_reader import PdfReader
-from pdf_readers.py_mu_pdf_reader import PyMuPdfReader
+from src.builders.declaration_builder import DeclarationBuilder
+from src.pdf_readers.pdf_reader import PdfReader
+from src.pdf_readers.py_mu_pdf_reader import PyMuPdfReader
 import os
 from typing import List
-from argparsers.declaration_argparser import DeclarationArgParser
+from src.argparsers.declaration_argparser import DeclarationArgParser
 
 declaration_arg_parser: DeclarationArgParser = DeclarationArgParser.parse()
 pdf_reader: PdfReader = PyMuPdfReader()

@@ -1,4 +1,4 @@
-from pdf_readers.pdf_reader import PdfReader
+from src.pdf_readers.pdf_reader import PdfReader
 import fitz
 
 class PyMuPdfReader(PdfReader):

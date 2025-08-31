@@ -1,9 +1,9 @@
-from pdf_readers.pdf_reader import PdfReader
-from fields.field import Field
-from fields.code_field import CodeField
-from fields.debit_field import DebitField
-from fields.period_field import PeriodField
-from fields.filename_field import FilenameField
+from src.pdf_readers.pdf_reader import PdfReader
+from src.fields.field import Field
+from src.fields.code_field import CodeField
+from src.fields.debit_field import DebitField
+from src.fields.period_field import PeriodField
+from src.fields.filename_field import FilenameField
 from typing import List, Dict
 import re
 import pandas as pd
