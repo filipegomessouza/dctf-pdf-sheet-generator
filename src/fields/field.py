@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional
+import pandas as pd
 
 class Field(ABC):
     __instance: Optional['Field'] = None
@@ -18,5 +19,9 @@ class Field(ABC):
     def format_match(self, match: str) -> str:
         pass
 
+    @abstractmethod
     def formatted_name(self) -> str:
         pass
+
+    def sort_dataframe(self, dataframe: pd.DataFrame) -> pd.DataFrame:
+        return dataframe.copy()

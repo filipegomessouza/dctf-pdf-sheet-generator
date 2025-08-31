@@ -9,4 +9,7 @@ class PyMuPdfReader(PdfReader):
         for page in pdf:
             text += page.get_text() + '\n'
 
-        return text
+        return text\
+            .replace('\u00A0', '')\
+            .replace(' ', '')\
+            .replace('\n', '')
