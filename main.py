@@ -9,7 +9,7 @@ declaration_arg_parser: DeclarationArgParser = DeclarationArgParser.parse()
 pdf_reader: PdfReader = PyMuPdfReader()
 declaration_manager = DeclarationBuilder(pdf_reader)
 
-filenames: List[str] = os.listdir(declaration_arg_parser.input_folder)
+filenames: List[str] = [filename for filename in os.listdir(declaration_arg_parser.input_folder) if filename.endswith('.pdf')]
 
 for filename in filenames:
     path: str = os.path.join(declaration_arg_parser.input_folder, filename)
