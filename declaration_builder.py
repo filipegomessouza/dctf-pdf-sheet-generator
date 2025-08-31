@@ -8,6 +8,7 @@ from typing import List, Dict
 import re
 import pandas as pd
 import os
+import json
 
 class DeclarationBuilder():
     def __init__(self, pdf_reader: PdfReader):
@@ -28,7 +29,6 @@ class DeclarationBuilder():
 
     def append_declarations_from_pdf(self, path: str) -> 'DeclarationBuilder':
         text = self.get_text_from_pdf(path)
-
         declaration: Dict[str, List[str]] = {}
         declarations_size: int = 0
 
@@ -39,9 +39,18 @@ class DeclarationBuilder():
             declarations_size = len(declaration[formatted_name])
 
         declaration[FilenameField().formatted_name()] = declarations_size * [os.path.basename(path)]
-        self.dataframe = pd.concat([self.dataframe, pd.DataFrame(declaration)], ignore_index = True)
 
-        return self
+        try:
+            self.dataframe = pd.concat([self.dataframe, pd.DataFrame(declaration)], ignore_index = True)
+        except Exception as exception:
+            self.__print_out_of_standard_message(path, declaration)
+        finally:
+            return self
+
+    def __print_out_of_standard_message(self, path: str, declaration: Dict[str, List[str]]):
+        print(f'Ocorreu um erro ao ler o arquivo {path}.')
+        print(f'Os dados identificados foram os seguintes:')
+        print(json.dumps(declaration, indent = 2, ensure_ascii = False))
 
     def get_text_from_pdf(self, path: str) -> str:
         return self.pdf_reader.get_text(path)\
@@ -50,7 +59,7 @@ class DeclarationBuilder():
             .replace('\n', '')
 
     def sort_by_period(self) -> 'DeclarationBuilder':
-        number_by_month: Dict[str, int] = {
+        month_by_period: Dict[str, int] = {
             'Janeiro': 1,
             'Fevereiro': 2,
             'Março': 3,
@@ -63,12 +72,20 @@ class DeclarationBuilder():
             'Outubro': 10,
             'Novembro': 11,
             'Dezembro': 12,
+            '1º Trimestre': 1,
+            '1° Trimestre': 1,
+            '2º Trimestre': 4,
+            '2° Trimestre': 4,
+            '3º Trimestre': 7,
+            '3° Trimestre': 7,
+            '4º Trimestre': 10,
+            '4° Trimestre': 10,
         }
 
         self.dataframe.sort_values(
             PeriodField().formatted_name(),
             key = lambda col: pd.to_datetime(
-                col.apply(lambda period: f"1/{number_by_month[period.split('/')[0]]}/{period.split('/')[1]}")
+                col.apply(lambda period: f"1/{month_by_period[period.split('/')[0]]}/{period.split('/')[1]}")
             ),
             inplace = True,
         )
