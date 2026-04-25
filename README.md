@@ -19,24 +19,24 @@ As linhas da planilha são ordenadas pelo período de apuração.
 
 ```
 dctf-pdf-sheet-generator/
-├── main.py                         # Ponto de entrada da aplicação
-├── requirements.txt                # Dependências Python
-├── pdfs/                           # Pasta padrão para os PDFs de entrada
+├── main.py                          # Ponto de entrada da aplicação
+├── requirements.txt                 # Dependências Python
+├── pdfs/                            # Pasta padrão para os PDFs de entrada
 └── src/
     ├── argparsers/
-    │   ├── argparser.py            # Interface base para parsers de argumentos
-    │   └── declaration_argparser.py# Parser dos argumentos de linha de comando
+    │   ├── argparser.py             # Interface base para parsers de argumentos
+    │   └── declaration_argparser.py # Parser dos argumentos de linha de comando
     ├── builders/
-    │   └── declaration_builder.py  # Orquestra a leitura dos PDFs e a construção da planilha
+    │   └── declaration_builder.py   # Orquestra a leitura dos PDFs e a construção da planilha
     ├── fields/
-    │   ├── field.py                # Interface base para campos extraídos
-    │   ├── code_field.py           # Campo: código de receita
-    │   ├── debit_field.py          # Campo: débito apurado
-    │   ├── filename_field.py       # Campo: nome do arquivo de origem
-    │   └── period_field.py         # Campo: período de apuração
+    │   ├── field.py                 # Interface base para campos extraídos
+    │   ├── code_field.py            # Campo: código de receita
+    │   ├── debit_field.py           # Campo: débito apurado
+    │   ├── filename_field.py        # Campo: nome do arquivo de origem
+    │   └── period_field.py          # Campo: período de apuração
     └── pdf_readers/
-        ├── pdf_reader.py           # Interface base para leitores de PDF
-        └── py_mu_pdf_reader.py     # Implementação com PyMuPDF
+        ├── pdf_reader.py            # Interface base para leitores de PDF
+        └── py_mu_pdf_reader.py      # Implementação com PyMuPDF
 ```
 
 ## Como rodar
